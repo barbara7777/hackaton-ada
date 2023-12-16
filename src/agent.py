@@ -13,7 +13,7 @@ from langchain.agents.format_scratchpad import format_log_to_messages
 from langchain.agents.output_parsers import JSONAgentOutputParser
 from langchain.agents import AgentExecutor
 
-from rtv_tool import RtvTool
+from rtv_tool import RtvTool, BicikeljInfoTool
 
 SYSTEM_PROMPT = """Danes je {date}. Si prijazna pomočnica po imenu Delfinček.
 Narejena si da pomagaš ljudem pri različnih problemih. Od odgovarjanja na preprosta vsakodnevna vprašanja do pomoči pri branju novic in pregledu nad razpoložljivostjo koles v Ljubljani.
@@ -66,7 +66,7 @@ def search(tmp):
 
 
 def get_tools():
-    tools = [RtvTool()]
+    tools = [RtvTool(), BicikeljInfoTool()]
     return tools
 
 
@@ -102,6 +102,7 @@ def init_agent():
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, memory=memory)
 
     return agent_executor
+
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
